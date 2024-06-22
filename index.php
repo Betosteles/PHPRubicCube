@@ -295,27 +295,42 @@ class rubik{
   
 }
 
-
 $cubo = new rubik();
-//$cubo->leer_todas_cara();
-//$cubo->caras['blue'] = [["1","2","3"],["8","B","4"],["7","6","5"]];
 
+if (isset($_GET['cubo'])){
+    $cubo->caras = json_decode($_GET['cubo'], true);
+}
 
-//$cubo->leer_cara($cubo->caras['blue']);
-//$cubo->front_face = "blue";
+if (isset($_GET['face'])){
+    $cubo->front_face = $_GET['face'];
+}
+if (isset($_GET['direction'])){
+    if ($_GET['direction'] == 'r') {
+        $cubo->normal_rotacion("r");
+    } else if ($_GET['direction'] == 'l') {
+        $cubo->normal_rotacion("l");
+    } else if ($_GET['direction'] == 'u') {
+        $cubo->normal_rotacion("u");
+    } else if ($_GET['direction'] == 'b') {
+        $cubo->normal_rotacion("b");
+    } else if ($_GET['direction'] == 'br') {
+        $cubo->reverse_rotacion("r");
+    } else if ($_GET['direction'] == 'bl') {
+        $cubo->reverse_rotacion("l");
+    } else if ($_GET['direction'] == 'bu') {
+        $cubo->reverse_rotacion("u");
+    } else if ($_GET['direction'] == 'bb') {
+        $cubo->reverse_rotacion("b");
+    }
+}
 
-$cubo->normal_rotacion("b");
-$cubo->normal_rotacion("r");
-$cubo->normal_rotacion("b");
-$cubo->reverse_rotacion("u");
-$cubo->normal_rotacion("l");
-$cubo->normal_rotacion("l");
-$cubo->normal_rotacion("r");
-$cubo->reverse_rotacion("b");
-$cubo->normal_rotacion("l");
+// Convertir la estructura del cubo a JSON
+$response = [];
+foreach ($cubo->caras as $face => $grid) {
+    $response[$face] = $grid;
+}
 
-
-
-$cubo->leer_todas_cara();
+header('Content-Type: application/json');
+echo json_encode($response);
 
 ?>
