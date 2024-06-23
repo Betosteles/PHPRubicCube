@@ -54,11 +54,11 @@
     </table>
     </div>
 
-    <select name="move" id="move">
+    <select name="moveS" id="move">
         
     </select>
 
-    <button type="button" onclick=''>Send</button>
+    <button type="button" onclick="updateTable()">Send</button>
     
     
 

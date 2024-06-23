@@ -312,6 +312,8 @@ if (!isset($_GET['cube']) and !isset($_GET['moves'])){
 
 if (isset($_GET['cube'])){
 
+    $cubo->caras = json_decode($_GET['cube'], true);
+
     if (isset($_GET['face'])){
         $cubo->front_face = $_GET['face'];
     }
@@ -336,8 +338,16 @@ if (isset($_GET['cube'])){
     }
 
 
-    $cubo->caras = json_decode($_GET['cubo'], true);
     
+
+    $response = [];
+    foreach ($cubo->caras as $face => $grid) {
+        $response[$face] = $grid;
+    }
+
+    header('Content-Type: application/json');
+    echo json_encode($response);
+        
 }
 
 if (isset($_GET['moves'])){
