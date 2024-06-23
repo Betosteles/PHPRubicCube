@@ -297,40 +297,69 @@ class rubik{
 
 $cubo = new rubik();
 
-if (isset($_GET['cube'])){
-    $cubo->caras = json_decode($_GET['cubo'], true);
+
+if (!isset($_GET['cube']) and !isset($_GET['moves'])){
+
+    $response = [];
+    $response["Error"] = ["Parametro Cubo No existe"];
+
+    header('Content-Type: application/json');
+    echo json_encode($response);
+
 }
 
-if (isset($_GET['face'])){
-    $cubo->front_face = $_GET['face'];
-}
-if (isset($_GET['direction'])){
-    if ($_GET['direction'] == 'r') {
-        $cubo->normal_rotacion("r");
-    } else if ($_GET['direction'] == 'l') {
-        $cubo->normal_rotacion("l");
-    } else if ($_GET['direction'] == 'u') {
-        $cubo->normal_rotacion("u");
-    } else if ($_GET['direction'] == 'b') {
-        $cubo->normal_rotacion("b");
-    } else if ($_GET['direction'] == 'br') {
-        $cubo->reverse_rotacion("r");
-    } else if ($_GET['direction'] == 'bl') {
-        $cubo->reverse_rotacion("l");
-    } else if ($_GET['direction'] == 'bu') {
-        $cubo->reverse_rotacion("u");
-    } else if ($_GET['direction'] == 'bb') {
-        $cubo->reverse_rotacion("b");
+
+
+if (isset($_GET['cube'])){
+
+    if (isset($_GET['face'])){
+        $cubo->front_face = $_GET['face'];
     }
+    if (isset($_GET['direction'])){
+        if ($_GET['direction'] == 'r') {
+            $cubo->normal_rotacion("r");
+        } else if ($_GET['direction'] == 'l') {
+            $cubo->normal_rotacion("l");
+        } else if ($_GET['direction'] == 'u') {
+            $cubo->normal_rotacion("u");
+        } else if ($_GET['direction'] == 'b') {
+            $cubo->normal_rotacion("b");
+        } else if ($_GET['direction'] == 'br') {
+            $cubo->reverse_rotacion("r");
+        } else if ($_GET['direction'] == 'bl') {
+            $cubo->reverse_rotacion("l");
+        } else if ($_GET['direction'] == 'bu') {
+            $cubo->reverse_rotacion("u");
+        } else if ($_GET['direction'] == 'bb') {
+            $cubo->reverse_rotacion("b");
+        }
+    }
+
+
+    $cubo->caras = json_decode($_GET['cubo'], true);
+    
 }
+
+if (isset($_GET['moves'])){
+
+    $response = [];
+
+    $response = 
+        ["r","l","b","u","br","bl","bu","bb"];
+    
+    header('Content-Type: application/json');
+    echo json_encode($response);
+    
+}
+
 
 // Convertir la estructura del cubo a JSON
-$response = [];
-foreach ($cubo->caras as $face => $grid) {
-    $response[$face] = $grid;
-}
+// $response = [];
+// foreach ($cubo->caras as $face => $grid) {
+//     $response[$face] = $grid;
+// }
 
-header('Content-Type: application/json');
-echo json_encode($response);
+// header('Content-Type: application/json');
+// echo json_encode($response);
 
 ?>

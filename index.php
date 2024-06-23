@@ -8,25 +8,58 @@
 
     <style>
         body {
-            display: flex;
-            justify-content: center; /* Centrar horizontalmente */
-            align-items: center; /* Centrar verticalmente */
-            height: 100vh; /* Altura del viewport */
-            margin: 0; /* Eliminar márgenes predeterminados */
-            background-color: #000000; /* Color de fondo opcional */
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #000000; /* Fondo claro para contraste */
         }
-        
+
+        .container {
+            display: grid;
+            justify-items: center;
+            gap: 20px; /* Espacio entre la tabla y el botón */
+        }
+
         table {
-            color : #ffffff
+            color: #ffffff;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ffffff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #888888;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #444444;
         }
     </style>
 
 </head>
 <body>
-
+    <div>
     <table id="tabla">      
         
     </table>
+    </div>
+
+    <select name="move" id="move">
+        
+    </select>
+
+    <button type="button" onclick=''>Send</button>
+    
     
 
     <script src ="index.js"></script> 
